@@ -38,6 +38,8 @@ export const metadata = {
 export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   try {
     const response = await fetch(
       `https://api-q1ln.onrender.com/workflows/payload/${eventInstanceId}`
