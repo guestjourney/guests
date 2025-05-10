@@ -4,11 +4,7 @@ import errorAnimation from "@/lotties/error.json";
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-export default function NotFound({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+export default function NotFound() {
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center p-4">
       <Lottie
