@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: [
+      "guestjourney-subtitles.b-cdn.net",
+      "guestjourney-api.onrender.com",
+    ],
+  },
 };
 
 export default nextConfig;

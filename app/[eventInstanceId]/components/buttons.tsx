@@ -1,0 +1,41 @@
+"use client";
+import { useState } from "react";
+import { ActionButton } from "./action-button";
+import { UpsellsButton } from "./upsells-button";
+import { Upsells } from "./upsells";
+
+type ButtonsProps = {
+  buttonText: string;
+  buttonLink: string;
+  moreOptions: string;
+  upsells: { text: string; icon: string; link: string }[];
+  accentColor: string;
+};
+const Buttons = ({
+  buttonText,
+  buttonLink,
+  moreOptions,
+  upsells,
+  accentColor,
+}: ButtonsProps) => {
+  const [isRenderUpsells, setIsRenderUpsells] = useState(false);
+  return (
+    <div className=" flex-col gap-8 hidden lg:flex">
+      <div className="flex flex-wrap gap-4">
+        <ActionButton
+          buttonText={buttonText}
+          buttonLink={buttonLink}
+          accentColor={accentColor}
+        />
+        <UpsellsButton
+          buttonText={moreOptions}
+          onClick={() => setIsRenderUpsells((prev) => !prev)}
+          isOpen={isRenderUpsells}
+        />
+      </div>
+      {isRenderUpsells && <Upsells upsells={upsells} />}
+    </div>
+  );
+};
+
+export { Buttons };
