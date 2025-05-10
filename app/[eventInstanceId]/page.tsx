@@ -28,17 +28,13 @@ type EventInstancePayloadDto = {
   fallbackVideoUrl: string;
 };
 
+type Params = Promise<{ eventInstanceId: string }>;
+
 // change the name of the tab to be more descriptive
 export const metadata = {
   title: "Personalized Video",
 };
-export default async function Page({
-  params,
-}: {
-  params: { eventInstanceId: string };
-}) {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
+export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
   try {

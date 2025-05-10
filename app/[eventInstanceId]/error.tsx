@@ -24,8 +24,8 @@ export default function Error({
       />
       <h2 className="text-2xl font-bold mb-2">Oops! Something went wrong.</h2>
       <p className="text-center text-gray-500 mb-4">
-        We're really sorry about that. Try refreshing the page, or come back a
-        bit later
+        We&apos;re really sorry about that. Try refreshing the page, or come
+        back a bit later
       </p>
       <Button
         size="lg"

@@ -1,8 +1,7 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
-
-// Add type declaration for Playerjs
 
 declare global {
   interface Window {
@@ -23,8 +22,6 @@ export function Player({
   id: string;
   thumbnailUrl: string;
 }) {
-  const sendEvent = (event: string, data: any) => {};
-
   useEffect(() => {
     if (!videoUrl) return;
 
@@ -71,39 +68,13 @@ export function Player({
           dataTime: number
         ) {
           if (!myPlayer) return;
-
-          if (event === "play") {
-            sendEvent(id, "play");
-          }
-
-          if (event === "time") {
-            const duration = myPlayer.api("duration");
-            const percent = (dataTime / duration) * 100;
-
-            if (percent >= 25 && !window.sent25) {
-              sendEvent(id, "25%");
-              window.sent25 = true;
-            }
-            if (percent >= 50 && !window.sent50) {
-              sendEvent(id, "50%");
-              window.sent50 = true;
-            }
-            if (percent >= 75 && !window.sent75) {
-              sendEvent(id, "75%");
-              window.sent75 = true;
-            }
-            if (percent >= 99 && !window.sent100) {
-              sendEvent(id, "100%");
-              window.sent100 = true;
-            }
-          }
         };
       }
     };
 
-    // return () => {
-    //   document.body.removeChild(script);
-    // };
+    return () => {
+      document.body.removeChild(script);
+    };
   }, [videoUrl, id, thumbnailUrl]);
 
   return <div id="player" className="player"></div>;
