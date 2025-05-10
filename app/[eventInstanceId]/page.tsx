@@ -4,6 +4,7 @@ import { Upsells } from "./components/upsells";
 import { Player } from "./components/player";
 import { Buttons } from "./components/buttons";
 import LoadingAnimation from "./components/loading-animation";
+import Image from "next/image";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -39,7 +40,7 @@ export default async function Page({ params }: { params: Params }) {
 
   try {
     const response = await fetch(
-      `http://localhost:3000/workflows/payload/${eventInstanceId}`
+      `https://api-q1ln.onrender.com/workflows/payload/${eventInstanceId}`
     );
 
     if (!response.ok) {
@@ -88,7 +89,7 @@ export default async function Page({ params }: { params: Params }) {
             className="bg-blue flex flex-col gap-8 "
             style={{ color: fontColor }}
           >
-            <img src={logo} alt="Logo" className="w-40" />
+            <Image src={logo} alt="Logo" className="w-40" />
             <h1 className="text-4xl font-bold">{title}</h1>
             <p className="text-2xl">{description}</p>
             <Buttons
