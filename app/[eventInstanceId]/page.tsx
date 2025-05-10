@@ -91,7 +91,7 @@ export default async function Page({ params }: { params: Params }) {
             className="bg-blue flex flex-col gap-8 "
             style={{ color: fontColor }}
           >
-            <Image src={logo} alt="Logo" className="w-40" />
+            <Image src={logo} alt="Logo" width={160} height={100} />
             <h1 className="text-4xl font-bold">{title}</h1>
             <p className="text-2xl">{description}</p>
             <Buttons

@@ -7,21 +7,15 @@ import loaderAnimation from "@/lotties/loader.json";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function LoadingAnimation() {
-  const [mounted, setMounted] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const timer = setTimeout(() => {
       setIsExiting(true);
     }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div

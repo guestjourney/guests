@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     domains: [
       "guestjourney-subtitles.b-cdn.net",
       "guestjourney-api.onrender.com",
+      "spcdn.shortpixel.ai",
     ],
   },
 };
