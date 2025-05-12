@@ -1,10 +1,5 @@
 import { Outfit } from "next/font/google";
-import { ActionButton } from "./components/action-button";
-import { Upsells } from "./components/upsells";
-import { Player } from "./components/player";
-import { Buttons } from "./components/buttons";
-import LoadingAnimation from "./components/loading-animation";
-import Image from "next/image";
+import { ClientWrapper } from "./components/client-wrapper";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -35,6 +30,7 @@ type Params = Promise<{ eventInstanceId: string }>;
 export const metadata = {
   title: "Personalized Video",
 };
+
 export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
@@ -78,53 +74,22 @@ export default async function Page({ params }: { params: Params }) {
     )?.value;
 
     return (
-      <div
-        className={`h-screen w-screen flex flex-col lg:flex-row ${outfit.className}`}
-      >
-        <LoadingAnimation />
-        {/* left */}
-        <div
-          className="w-full lg:w-3/5 flex items-center p-10 lg:pr-[20%] pb-20 lg:pb-10"
-          style={{ backgroundColor: brandColor }}
-        >
-          <div
-            className="bg-blue flex flex-col gap-8 "
-            style={{ color: fontColor }}
-          >
-            <Image src={logo} alt="Logo" width={160} height={100} />
-            <h1 className="text-4xl font-bold">{title}</h1>
-            <p className="text-2xl">{description}</p>
-            <Buttons
-              buttonText={buttonText || ""}
-              buttonLink={buttonLink || ""}
-              moreOptions={moreOptions || ""}
-              upsells={upsells || []}
-              accentColor={accentColor}
-            />
-          </div>
-          {/* right */}
-        </div>
-        <div className="w-full lg:w-2/5 relative flex justify-center">
-          <div className="relative lg:absolute lg:top-1/2 -top-[20px] lg:-left-1/3 lg:-translate-y-1/2 rounded-2xl overflow-hidden w-[90%] lg:w-full">
-            <Player
-              videoUrl={generatedVideo || fallbackVideoUrl}
-              id="player"
-              thumbnailUrl={thumbnail}
-            />
-          </div>
-        </div>
-
-        {/* mobile */}
-        <div className="gap-4 flex flex-1 flex-col lg:hidden justify-end items-center">
-          <div className="flex gap-4 flex-1">
-            <Upsells upsells={upsells} />
-          </div>
-          <ActionButton
-            buttonText={buttonText || ""}
-            buttonLink={buttonLink || ""}
-            accentColor={accentColor}
-          />
-        </div>
+      <div className={outfit.className}>
+        <ClientWrapper
+          logo={logo}
+          brandColor={brandColor}
+          accentColor={accentColor}
+          fontColor={fontColor}
+          title={title || ""}
+          description={description || ""}
+          buttonText={buttonText || ""}
+          buttonLink={buttonLink || ""}
+          moreOptions={moreOptions || ""}
+          upsells={upsells}
+          generatedVideo={generatedVideo}
+          thumbnail={thumbnail}
+          fallbackVideoUrl={fallbackVideoUrl}
+        />
       </div>
     );
   } catch (error) {

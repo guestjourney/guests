@@ -1,0 +1,45 @@
+.title {
+  font-size: 45px;
+  @media (max-width: 1024px) {
+    font-size: 29px;
+  }
+}
+
+.left-container {
+  padding-left: 80px;
+}
+
+.left-container-div {
+  @media (max-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.description {
+  color: #ffffffc2;
+  @media (max-width: 1024px) {
+    font-size: 19px;
+  }
+}
+
+.more-button {
+  color: #ffffffc2;
+  border-color: #ffffffc2;
+  @media (max-width: 1024px) {
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.upsell {
+  background-color: #ffffff30;
+  @media (max-width: 1024px) {
+    background-color: var(--brand-color);
+  }
+}
+
+.mobile-actions-container {
+  padding-top: 40px;
+}

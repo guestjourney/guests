@@ -33,7 +33,7 @@ const Buttons = ({
           isOpen={isRenderUpsells}
         />
       </div>
-      {isRenderUpsells && <Upsells upsells={upsells} />}
+      {isRenderUpsells && <Upsells upsells={upsells} brandColor="red" />}
     </div>
   );
 };
