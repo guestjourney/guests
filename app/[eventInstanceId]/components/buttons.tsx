@@ -33,7 +33,11 @@ const Buttons = ({
           isOpen={isRenderUpsells}
         />
       </div>
-      {isRenderUpsells && <Upsells upsells={upsells} brandColor="red" />}
+      <div className="h-[100px]">
+        {isRenderUpsells && (
+          <Upsells upsells={upsells} brandColor={accentColor} />
+        )}
+      </div>
     </div>
   );
 };

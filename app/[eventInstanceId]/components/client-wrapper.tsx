@@ -48,7 +48,7 @@ export function ClientWrapper({
       <LoadingAnimation />
       {/* left */}
       <div
-        className="w-full lg:w-3/5 flex items-center p-10 lg:pr-[20%] pb-20 lg:pb-10 left-container"
+        className="w-full lg:w-3/5 flex items-center p-10 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1"
         style={{ backgroundColor: brandColor }}
       >
         <div
@@ -78,12 +78,11 @@ export function ClientWrapper({
       </div>
       {/* 
       {/* mobile */}
-      <div className="flex flex-1 flex-col lg:hidden justify-end items-center mobile-actions-container">
-        {isUpsells && (
-          <div className="flex gap-4 flex-1">
-            <Upsells upsells={upsells} brandColor={brandColor} />
-          </div>
-        )}
+      <div className="flex  flex-col lg:hidden justify-end items-center pt-10 ">
+        <div className="h-[100px] mb-10">
+          {isUpsells && <Upsells upsells={upsells} brandColor={brandColor} />}
+        </div>
+
         <UpsellsButton
           buttonText={moreOptions}
           onClick={() => setIsUpsells((prev) => !prev)}

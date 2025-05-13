@@ -7,6 +7,9 @@
 
 .left-container {
   padding-left: 80px;
+  /* @media (max-width: 1024px) {
+    padding-left: auto;
+  } */
 }
 
 .left-container-div {

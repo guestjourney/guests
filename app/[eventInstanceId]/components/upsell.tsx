@@ -22,7 +22,7 @@ function Upsell({
 
   return (
     <div
-      className="flex items-center gap-4 p-4cursor-pointer flex-col justify-center"
+      className="flex items-center gap-4 p-4 cursor-pointer flex-col justify-center"
       onClick={handleClick}
     >
       <Image

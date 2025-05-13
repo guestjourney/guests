@@ -10,7 +10,7 @@ const Upsells = ({
   brandColor: string;
 }) => {
   return (
-    <div className="gap-4 flex">
+    <div className=" flex h-[100%]">
       {upsells.map((upsell) => (
         <Upsell
           key={upsell.text}
