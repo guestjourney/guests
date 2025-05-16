@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { eventInstanceId: string } }
+  { params }: { params: Promise<{ eventInstanceId: string }> }
 ) {
   try {
     const eventInstanceId = (await params).eventInstanceId;
