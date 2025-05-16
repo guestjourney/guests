@@ -31,21 +31,18 @@ export default function LoadingAnimation({
     return () => clearTimeout(timer);
   }, []);
 
-  const greeting = useMemo(() => {
-    if (!language) return "";
-    const timeOfDay = getTimeOfDay();
-    return greetings[language]?.[timeOfDay] || "";
-  }, [language]);
-
-  if (!greeting) return null;
-
   return (
     <div
       className={`flex flex-col gap-4 items-center justify-center fixed top-0 left-0 w-full h-full z-10 bg-white transition-transform duration-1000 ease-in-out ${
         isExiting ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <span className="text-3xl capitalize">{`${name}, ${greeting}`}</span>
+      <div className="text-3xl capitalize">
+        <span className="text-3xl capitalize">{`${name}, `}</span>
+        <span className="text-3xl capitalize">
+          {greetings[language]?.[getTimeOfDay()]}
+        </span>
+      </div>
       <Lottie
         animationData={loaderAnimation}
         loop={true}
