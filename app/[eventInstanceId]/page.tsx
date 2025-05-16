@@ -27,7 +27,6 @@ type EventInstancePayloadDto = {
 
 type Params = Promise<{ eventInstanceId: string }>;
 
-// change the name of the tab to be more descriptive
 export const metadata = {
   title: "Personalized Video",
 };
@@ -37,8 +36,10 @@ export default async function Page({ params }: { params: Params }) {
 
   try {
     const response = await fetch(
-      `https://api-q1ln.onrender.com/workflows/payload/${eventInstanceId}`
-      // `http://localhost:3000/workflows/payload/${eventInstanceId}`
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL || ""
+      }/api/event-instance/${eventInstanceId}`,
+      { cache: "no-store" }
     );
 
     if (!response.ok) {
@@ -47,7 +48,7 @@ export default async function Page({ params }: { params: Params }) {
 
     const data = (await response.json()) as EventInstancePayloadDto;
     const {
-      logo = "https://www.luxuryhotelawards.com/wp-content/uploads/sites/8/2023/10/logoPBH_DIAP_portrait.png",
+      logo = "",
       brandColor,
       accentColor,
       fontColor = "#ffffff",
@@ -56,7 +57,7 @@ export default async function Page({ params }: { params: Params }) {
       generatedVideo = "",
       upsells = [],
       fallbackVideoUrl = "",
-      language = "en",
+      language = "",
       variables = {},
     } = data;
 

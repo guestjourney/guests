@@ -26,7 +26,7 @@ export default function LoadingAnimation({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsExiting(true);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
