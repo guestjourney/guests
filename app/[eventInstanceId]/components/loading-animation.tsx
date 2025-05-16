@@ -15,7 +15,7 @@ function getTimeOfDay(): "morning" | "afternoon" | "evening" {
 }
 
 export default function LoadingAnimation({
-  language = "en",
+  language = "",
   name,
 }: {
   language: string;
@@ -32,8 +32,9 @@ export default function LoadingAnimation({
   }, []);
 
   const greeting = useMemo(() => {
+    if (!language) return "";
     const timeOfDay = getTimeOfDay();
-    const text = greetings[language]?.[timeOfDay] || greetings["en"][timeOfDay];
+    const text = greetings[language]?.[timeOfDay];
     return text;
   }, [language]);
 
