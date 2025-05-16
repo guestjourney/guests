@@ -19,7 +19,6 @@ function percentStringToNumber(percent: string): number {
 
 export function Player({
   videoUrl,
-  id,
   eventInstanceId,
   thumbnailUrl,
 }: {
@@ -105,7 +104,7 @@ export function Player({
             handlePlayEvent();
           }
 
-          if (event === "pause") {
+          if (event === "userpause") {
             handlePauseEvent();
           }
 
