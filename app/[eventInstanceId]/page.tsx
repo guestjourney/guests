@@ -22,6 +22,7 @@ type EventInstancePayloadDto = {
     link: string;
   }>;
   fallbackVideoUrl: string;
+  language: string;
 };
 
 type Params = Promise<{ eventInstanceId: string }>;
@@ -34,11 +35,10 @@ export const metadata = {
 export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   try {
     const response = await fetch(
       `https://api-q1ln.onrender.com/workflows/payload/${eventInstanceId}`
+      // `http://localhost:3000/workflows/payload/${eventInstanceId}`
     );
 
     if (!response.ok) {
@@ -56,6 +56,8 @@ export default async function Page({ params }: { params: Params }) {
       generatedVideo = "",
       upsells = [],
       fallbackVideoUrl = "",
+      language = "en",
+      variables = {},
     } = data;
 
     const description = fields.find(
@@ -73,23 +75,28 @@ export default async function Page({ params }: { params: Params }) {
       (field) => field.key === "moreOptions"
     )?.value;
 
+    // Create a client boundary by wrapping the ClientWrapper in a div
     return (
       <div className={outfit.className}>
-        <ClientWrapper
-          logo={logo}
-          brandColor={brandColor}
-          accentColor={accentColor}
-          fontColor={fontColor}
-          title={title || ""}
-          description={description || ""}
-          buttonText={buttonText || ""}
-          buttonLink={buttonLink || ""}
-          moreOptions={moreOptions || ""}
-          upsells={upsells}
-          generatedVideo={generatedVideo}
-          thumbnail={thumbnail}
-          fallbackVideoUrl={fallbackVideoUrl}
-        />
+        <div suppressHydrationWarning>
+          <ClientWrapper
+            logo={logo}
+            brandColor={brandColor}
+            accentColor={accentColor}
+            fontColor={fontColor}
+            title={title || ""}
+            description={description || ""}
+            buttonText={buttonText || ""}
+            buttonLink={buttonLink || ""}
+            moreOptions={moreOptions || ""}
+            upsells={upsells}
+            generatedVideo={generatedVideo}
+            thumbnail={thumbnail}
+            fallbackVideoUrl={fallbackVideoUrl}
+            name={variables.firstName || variables.name || ""}
+            language={language}
+          />
+        </div>
       </div>
     );
   } catch (error) {

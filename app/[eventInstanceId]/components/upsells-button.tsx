@@ -1,4 +1,5 @@
 "use client";
+
 import { Plus, Minus } from "lucide-react";
 import "./styles.css";
 
@@ -13,7 +14,6 @@ const UpsellsButton = ({
 }) => {
   return (
     <button
-      // className="font-bold tracking-wider uppercase py-3 px-6 border-1 border-white rounded-[50px] w-fit hidden items-center gap-4 cursor-pointer lg:flex more-button"
       className="uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer  lg:rounded-[50px] w-full lg:w-fit lg:border-1 lg:border-white more-button"
       onClick={onClick}
     >

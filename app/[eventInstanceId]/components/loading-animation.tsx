@@ -1,21 +1,41 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import loaderAnimation from "@/lotties/loader.json";
+import { greetings } from "@/i18n/greeting";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-export default function LoadingAnimation() {
+function getTimeOfDay(): "morning" | "afternoon" | "evening" {
+  const hour = new Date().getHours();
+  if (hour < 12) return "morning";
+  if (hour < 18) return "afternoon";
+  return "evening";
+}
+
+export default function LoadingAnimation({
+  language = "en",
+  name,
+}: {
+  language: string;
+  name: string;
+}) {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsExiting(true);
-    }, 1000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const greeting = useMemo(() => {
+    const timeOfDay = getTimeOfDay();
+    const text = greetings[language]?.[timeOfDay] || greetings["en"][timeOfDay];
+    return text;
+  }, [language]);
 
   return (
     <div
@@ -23,10 +43,11 @@ export default function LoadingAnimation() {
         isExiting ? "-translate-y-full" : "translate-y-0"
       }`}
     >
+      <span className="text-3xl capitalize">{`${name}, ${greeting}`}</span>
       <Lottie
         animationData={loaderAnimation}
         loop={true}
-        className="w-48 h-48"
+        className="w-36 h-36"
         autoPlay={true}
       />
     </div>

@@ -24,6 +24,8 @@ type ClientWrapperProps = {
   generatedVideo: string;
   thumbnail: string;
   fallbackVideoUrl: string;
+  name: string;
+  language: string;
 };
 
 export function ClientWrapper({
@@ -40,12 +42,14 @@ export function ClientWrapper({
   generatedVideo,
   thumbnail,
   fallbackVideoUrl,
+  name,
+  language,
 }: ClientWrapperProps) {
   const [isUpsells, setIsUpsells] = useState(false);
 
   return (
     <div className="min-h-screen min-w-screen flex flex-col lg:flex-row">
-      <LoadingAnimation />
+      <LoadingAnimation language={language} name={name} />
       {/* left */}
       <div
         className="w-full lg:w-3/5 flex items-center p-10 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1"
@@ -76,8 +80,7 @@ export function ClientWrapper({
           />
         </div>
       </div>
-      {/* 
-      {/* mobile */}
+      {/*  mobile */}
       <div className="flex  flex-col lg:hidden justify-end items-center pt-10 ">
         <div className="h-[100px] mb-10">
           {isUpsells && <Upsells upsells={upsells} brandColor={brandColor} />}
