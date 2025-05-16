@@ -34,9 +34,10 @@ export default function LoadingAnimation({
   const greeting = useMemo(() => {
     if (!language) return "";
     const timeOfDay = getTimeOfDay();
-    const text = greetings[language]?.[timeOfDay];
-    return text;
+    return greetings[language]?.[timeOfDay] || "";
   }, [language]);
+
+  if (!greeting) return null;
 
   return (
     <div

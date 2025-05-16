@@ -7,7 +7,7 @@ import { Buttons } from "./buttons";
 import LoadingAnimation from "./loading-animation";
 import Image from "next/image";
 import "./styles.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { UpsellsButton } from "./upsells-button";
 
 type ClientWrapperProps = {
@@ -26,6 +26,7 @@ type ClientWrapperProps = {
   fallbackVideoUrl: string;
   name: string;
   language: string;
+  eventInstanceId: string;
 };
 
 export function ClientWrapper({
@@ -44,6 +45,7 @@ export function ClientWrapper({
   fallbackVideoUrl,
   name,
   language,
+  eventInstanceId,
 }: ClientWrapperProps) {
   const [isUpsells, setIsUpsells] = useState(false);
 
@@ -75,7 +77,7 @@ export function ClientWrapper({
         <div className="relative lg:absolute lg:top-1/2 -top-[20px] lg:-left-1/3 lg:-translate-y-1/2 rounded-3xl overflow-hidden w-[90%] lg:w-full">
           <Player
             videoUrl={generatedVideo || fallbackVideoUrl}
-            id="player"
+            eventInstanceId={eventInstanceId}
             thumbnailUrl={thumbnail}
           />
         </div>

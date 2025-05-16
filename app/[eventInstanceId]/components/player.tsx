@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 declare global {
   interface Window {
@@ -13,15 +13,44 @@ declare global {
   }
 }
 
+function percentStringToNumber(percent: string): number {
+  return parseFloat(percent.replace("%", ""));
+}
+
 export function Player({
   videoUrl,
   id,
+  eventInstanceId,
   thumbnailUrl,
 }: {
   videoUrl: string;
-  id: string;
+  eventInstanceId: string;
   thumbnailUrl: string;
 }) {
+  const handlePlayEvent = () => {
+    console.log("play");
+  };
+
+  const handlePauseEvent = () => {
+    console.log("pause");
+  };
+
+  const handleProgressEvent = (percent: number) => {
+    console.log("progress", percent);
+  };
+
+  const handleVolumeChangeEvent = () => {
+    console.log("volume change");
+  };
+
+  const handleTimeEvent = (data: any) => {
+    console.log("time", data);
+  };
+
+  const handleFullscreenEvent = () => {
+    console.log("fullscreen");
+  };
+
   useEffect(() => {
     if (!videoUrl) return;
 
@@ -67,10 +96,34 @@ export function Player({
         // Define event handler
         (window as any).PlayerjsEvents = function (
           event: string,
-          id: string,
-          dataTime: number
+          _id: string,
+          data: any
         ) {
           if (!myPlayer) return;
+
+          if (event === "play") {
+            handlePlayEvent();
+          }
+
+          if (event === "pause") {
+            handlePauseEvent();
+          }
+
+          if (event === "quartile") {
+            handleProgressEvent(percentStringToNumber(data));
+          }
+
+          if (event === "volumechange") {
+            handleVolumeChangeEvent();
+          }
+
+          if (event === "time") {
+            handleTimeEvent(data);
+          }
+
+          if (event === "fullscreen") {
+            handleFullscreenEvent();
+          }
         };
       }
     };
@@ -78,7 +131,8 @@ export function Player({
     return () => {
       document.body.removeChild(script);
     };
-  }, [videoUrl, id, thumbnailUrl]);
+  }),
+    [videoUrl, eventInstanceId, thumbnailUrl];
 
   return <div id="player" className="player"></div>;
 }

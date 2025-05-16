@@ -81,6 +81,7 @@ export default async function Page({ params }: { params: Params }) {
       <div className={outfit.className}>
         <div suppressHydrationWarning>
           <ClientWrapper
+            eventInstanceId={eventInstanceId}
             logo={logo}
             brandColor={brandColor}
             accentColor={accentColor}
