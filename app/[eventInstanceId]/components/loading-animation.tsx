@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import loaderAnimation from "@/lotties/loader.json";
 import { greetings } from "@/i18n/greeting";
 
