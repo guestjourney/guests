@@ -1,15 +1,12 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useEffect } from "react";
 
 declare global {
   interface Window {
     Playerjs: any;
-    sent25?: boolean;
-    sent50?: boolean;
-    sent75?: boolean;
-    sent100?: boolean;
   }
 }
 
@@ -50,6 +47,10 @@ export function Player({
     console.log("fullscreen");
   };
 
+  const handleStartEvent = () => {
+    console.log("start");
+  };
+
   useEffect(() => {
     if (!videoUrl) return;
 
@@ -67,9 +68,6 @@ export function Player({
           file: videoUrl,
           poster: thumbnailUrl,
           subtitle: "",
-          // "https://guestjourney-subtitles.b-cdn.net/711acc20-c42f-4a3b-92e8-1a8f4c662965.ttp",
-          // "https://guestjourney-subtitles.b-cdn.net/wedding-generic-english.vtt",
-          // "https://guestjourney-subtitles.b-cdn.net/4dda9f7a-5f18-4451-b234-5ea5bd799922.vtt",
           default_subtitle: "Default",
           controls: true,
           fullscreen: true,
@@ -86,12 +84,6 @@ export function Player({
           },
         });
 
-        // Reset flags
-        window.sent25 = false;
-        window.sent50 = false;
-        window.sent75 = false;
-        window.sent100 = false;
-
         // Define event handler
         (window as any).PlayerjsEvents = function (
           event: string,
@@ -99,6 +91,10 @@ export function Player({
           data: any
         ) {
           if (!myPlayer) return;
+
+          if (event === "start") {
+            handleStartEvent();
+          }
 
           if (event === "play") {
             handlePlayEvent();
@@ -130,8 +126,7 @@ export function Player({
     return () => {
       document.body.removeChild(script);
     };
-  }),
-    [videoUrl, eventInstanceId, thumbnailUrl];
+  }, [videoUrl, eventInstanceId, thumbnailUrl]);
 
   return <div id="player" className="player"></div>;
 }
