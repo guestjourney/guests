@@ -1,12 +1,12 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React, { useEffect } from "react";
 
 declare global {
   interface Window {
     Playerjs: any;
+    PlayerjsEvents: (event: string, id: string, data: any) => void;
   }
 }
 
@@ -23,47 +23,64 @@ export function Player({
   eventInstanceId: string;
   thumbnailUrl: string;
 }) {
-  const handlePlayEvent = () => {
-    console.log("play");
-  };
-
-  const handlePauseEvent = () => {
-    console.log("pause");
-  };
-
-  const handleProgressEvent = (percent: number) => {
-    console.log("progress", percent);
-  };
-
-  const handleVolumeChangeEvent = () => {
-    console.log("volume change");
-  };
-
-  const handleTimeEvent = (data: any) => {
-    console.log("time", data);
-  };
-
-  const handleFullscreenEvent = () => {
-    console.log("fullscreen");
-  };
-
-  const handleStartEvent = () => {
-    console.log("start");
+  const updateEventAnalytics = async (body: Record<string, any>) => {
+    try {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BASE_URL || ""
+        }/api/event-analytics/${eventInstanceId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PATCH",
+          body: JSON.stringify(body),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update analytics");
+      }
+    } catch (error) {
+      console.error("Error updating analytics:", error);
+    }
   };
 
   useEffect(() => {
     if (!videoUrl) return;
 
-    let myPlayer: any = null;
-
     const script = document.createElement("script");
     script.src = "/js/playerjs.js";
     script.async = true;
-    document.body.appendChild(script);
+
+    const handlePlayerEvents = (event: string, _id: string, data: any) => {
+      switch (event) {
+        case "play":
+          updateEventAnalytics({ play: true });
+          break;
+        case "userpause":
+          updateEventAnalytics({ pause: true });
+          break;
+        case "quartile":
+          updateEventAnalytics({ progress: percentStringToNumber(data) });
+          break;
+        case "volume":
+          updateEventAnalytics({ volumeChange: true });
+          break;
+        case "fullscreen":
+          updateEventAnalytics({ fullScreen: true });
+          break;
+        case "download":
+          updateEventAnalytics({ download: true });
+          break;
+        case "geo":
+          console.log(data);
+          break;
+      }
+    };
 
     script.onload = () => {
       if (window.Playerjs) {
-        myPlayer = new window.Playerjs({
+        new window.Playerjs({
           id: "player",
           file: videoUrl,
           poster: thumbnailUrl,
@@ -84,47 +101,16 @@ export function Player({
           },
         });
 
-        // Define event handler
-        (window as any).PlayerjsEvents = function (
-          event: string,
-          _id: string,
-          data: any
-        ) {
-          if (!myPlayer) return;
-
-          if (event === "start") {
-            handleStartEvent();
-          }
-
-          if (event === "play") {
-            handlePlayEvent();
-          }
-
-          if (event === "userpause") {
-            handlePauseEvent();
-          }
-
-          if (event === "quartile") {
-            handleProgressEvent(percentStringToNumber(data));
-          }
-
-          if (event === "volumechange") {
-            handleVolumeChangeEvent();
-          }
-
-          if (event === "time") {
-            handleTimeEvent(data);
-          }
-
-          if (event === "fullscreen") {
-            handleFullscreenEvent();
-          }
-        };
+        window.PlayerjsEvents = handlePlayerEvents;
       }
     };
 
+    document.body.appendChild(script);
+
     return () => {
-      document.body.removeChild(script);
+      if (script.parentNode) {
+        document.body.removeChild(script);
+      }
     };
   }, [videoUrl, eventInstanceId, thumbnailUrl]);
 

@@ -1,14 +1,12 @@
 "use client";
 
-import { ActionButton } from "./action-button";
-import { Upsells } from "./upsells";
 import { Player } from "./player";
 import { Buttons } from "./buttons";
 import LoadingAnimation from "./loading-animation";
 import Image from "next/image";
 import "./styles.css";
-import React, { useState } from "react";
-import { UpsellsButton } from "./upsells-button";
+import { MobileButtons } from "./mobile-buttons";
+import { Analytics } from "./analytics";
 
 type ClientWrapperProps = {
   logo: string;
@@ -47,58 +45,51 @@ export function ClientWrapper({
   language,
   eventInstanceId,
 }: ClientWrapperProps) {
-  const [isUpsells, setIsUpsells] = useState(false);
-
   return (
-    <div className="min-h-screen min-w-screen flex flex-col lg:flex-row">
-      <LoadingAnimation language={language} name={name} />
-      {/* left */}
-      <div
-        className="w-full lg:w-3/5 flex items-center p-10 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1"
-        style={{ backgroundColor: brandColor }}
-      >
+    <>
+      <div className="min-h-screen min-w-screen flex flex-col lg:flex-row">
+        <LoadingAnimation language={language} name={name} />
+        {/* left */}
         <div
-          className="bg-blue flex flex-col gap-8 lg:items-start lg:justify-start lg:text-start items-center justify-center text-center"
-          style={{ color: fontColor }}
+          className="w-full lg:w-3/5 flex items-center p-10 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1"
+          style={{ backgroundColor: brandColor }}
         >
-          <Image src={logo} alt="Logo" width={160} height={100} />
-          <h1 className="text-[30px] lg:text-[45px] font-bold">{title}</h1>
-          <p className="text-2xl description">{description}</p>
-          <Buttons
-            buttonText={buttonText}
-            buttonLink={buttonLink}
-            moreOptions={moreOptions}
-            upsells={upsells}
-            accentColor={accentColor}
-          />
+          <div
+            className="bg-blue flex flex-col gap-8 lg:items-start lg:justify-start lg:text-start items-center justify-center text-center"
+            style={{ color: fontColor }}
+          >
+            <Image src={logo} alt="Logo" width={160} height={100} />
+            <h1 className="text-[30px] lg:text-[45px] font-bold">{title}</h1>
+            <p className="text-2xl description">{description}</p>
+            <Buttons
+              buttonText={buttonText}
+              buttonLink={buttonLink}
+              moreOptions={moreOptions}
+              upsells={upsells}
+              accentColor={accentColor}
+            />
+          </div>
         </div>
-      </div>
-      <div className="w-full lg:w-2/5 relative flex justify-center">
-        <div className="relative lg:absolute lg:top-1/2 -top-[20px] lg:-left-1/3 lg:-translate-y-1/2 rounded-3xl overflow-hidden w-[90%] lg:w-full">
-          <Player
-            videoUrl={generatedVideo || fallbackVideoUrl}
-            eventInstanceId={eventInstanceId}
-            thumbnailUrl={thumbnail}
-          />
+        <div className="w-full lg:w-2/5 relative flex justify-center">
+          <div className="relative lg:absolute lg:top-1/2 -top-[20px] lg:-left-1/3 lg:-translate-y-1/2 rounded-3xl overflow-hidden w-[90%] lg:w-full">
+            <Player
+              videoUrl={generatedVideo || fallbackVideoUrl}
+              eventInstanceId={eventInstanceId}
+              thumbnailUrl={thumbnail}
+            />
+          </div>
         </div>
-      </div>
-      {/*  mobile */}
-      <div className="flex  flex-col lg:hidden justify-end items-center pt-10 ">
-        <div className="h-[100px] mb-10">
-          {isUpsells && <Upsells upsells={upsells} brandColor={brandColor} />}
-        </div>
-
-        <UpsellsButton
-          buttonText={moreOptions}
-          onClick={() => setIsUpsells((prev) => !prev)}
-          isOpen={isUpsells}
-        />
-        <ActionButton
+        {/*  mobile */}
+        <MobileButtons
+          upsells={upsells}
+          brandColor={brandColor}
+          accentColor={accentColor}
           buttonText={buttonText}
           buttonLink={buttonLink}
-          accentColor={accentColor}
+          moreOptions={moreOptions}
         />
       </div>
-    </div>
+      <Analytics />
+    </>
   );
 }
