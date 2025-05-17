@@ -58,11 +58,11 @@ export function ClientWrapper({
         style={{ backgroundColor: brandColor }}
       >
         <div
-          className="bg-blue flex flex-col gap-8 left-container-div"
+          className="bg-blue flex flex-col gap-8 lg:items-start lg:justify-start lg:text-start items-center justify-center text-center"
           style={{ color: fontColor }}
         >
           <Image src={logo} alt="Logo" width={160} height={100} />
-          <h1 className="title font-bold">{title}</h1>
+          <h1 className="text-[30px] lg:text-[45px] font-bold">{title}</h1>
           <p className="text-2xl description">{description}</p>
           <Buttons
             buttonText={buttonText}

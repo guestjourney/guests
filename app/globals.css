@@ -2,9 +2,27 @@
 @import "tw-animate-css";
 
 @theme {
-  --text-5xl: 5rem;
-}
+  --animate-glue: glue 1s ease-in-out infinite;
+  --animate-fade-in: fade-in 1s ease-in-out;
 
-.font-size-giant {
-  font-size: 45px;
+  @keyframes glue {
+    0%,
+    100% {
+      box-shadow: 0 0 8px 2px var(--animate-glue-color);
+    }
+    50% {
+      box-shadow: 0 0 14px 6px var(--animate-glue-color);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
