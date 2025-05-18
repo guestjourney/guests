@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "spcdn.shortpixel.ai",
       },
+      {
+        protocol: "https",
+        hostname: "guestjourney.ai",
+      },
     ],
   },
 };

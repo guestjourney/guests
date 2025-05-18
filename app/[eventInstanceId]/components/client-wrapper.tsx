@@ -25,6 +25,7 @@ type ClientWrapperProps = {
   name: string;
   language: string;
   eventInstanceId: string;
+  generatedSubtitles: string;
 };
 
 export function ClientWrapper({
@@ -44,6 +45,7 @@ export function ClientWrapper({
   name,
   language,
   eventInstanceId,
+  generatedSubtitles,
 }: ClientWrapperProps) {
   return (
     <>
@@ -76,6 +78,7 @@ export function ClientWrapper({
               videoUrl={generatedVideo || fallbackVideoUrl}
               eventInstanceId={eventInstanceId}
               thumbnailUrl={thumbnail}
+              subtitles={generatedSubtitles}
             />
           </div>
         </div>

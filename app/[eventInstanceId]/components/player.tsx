@@ -18,10 +18,12 @@ export function Player({
   videoUrl,
   eventInstanceId,
   thumbnailUrl,
+  subtitles,
 }: {
   videoUrl: string;
   eventInstanceId: string;
   thumbnailUrl: string;
+  subtitles: string;
 }) {
   const updateEventAnalytics = async (body: Record<string, any>) => {
     try {
@@ -84,7 +86,7 @@ export function Player({
           id: "player",
           file: videoUrl,
           poster: thumbnailUrl,
-          subtitle: "",
+          subtitle: subtitles,
           default_subtitle: "Default",
           controls: true,
           fullscreen: true,
@@ -112,7 +114,7 @@ export function Player({
         document.body.removeChild(script);
       }
     };
-  }, [videoUrl, eventInstanceId, thumbnailUrl]);
+  }, [videoUrl, eventInstanceId, thumbnailUrl, subtitles]);
 
   return <div id="player" className="player"></div>;
 }

@@ -23,6 +23,7 @@ type EventInstancePayloadDto = {
   }>;
   fallbackVideoUrl: string;
   language: string;
+  generatedSubtitles: string;
 };
 
 type Params = Promise<{ eventInstanceId: string }>;
@@ -59,6 +60,7 @@ export default async function Page({ params }: { params: Params }) {
       fallbackVideoUrl = "",
       language = "",
       variables = {},
+      generatedSubtitles = "",
     } = data;
 
     const description = fields.find(
@@ -97,6 +99,7 @@ export default async function Page({ params }: { params: Params }) {
             fallbackVideoUrl={fallbackVideoUrl}
             name={variables.firstName || variables.name || ""}
             language={language}
+            generatedSubtitles={generatedSubtitles}
           />
         </div>
       </div>
