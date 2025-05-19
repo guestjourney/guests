@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 
 @theme {
-  --animate-glue: glue 1s ease-in-out infinite;
+  --animate-glue: glue 2s ease-in-out infinite;
   --animate-fade-in: fade-in 1s ease-in-out;
 
   @keyframes glue {

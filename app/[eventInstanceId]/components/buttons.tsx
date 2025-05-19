@@ -22,16 +22,20 @@ const Buttons = ({
   return (
     <div className=" flex-col gap-8 hidden lg:flex">
       <div className="flex flex-wrap gap-4">
-        <ActionButton
-          buttonText={buttonText}
-          buttonLink={buttonLink}
-          accentColor={accentColor}
-        />
-        <UpsellsButton
-          buttonText={moreOptions}
-          onClick={() => setIsRenderUpsells((prev) => !prev)}
-          isOpen={isRenderUpsells}
-        />
+        {buttonText && (
+          <ActionButton
+            buttonText={buttonText}
+            buttonLink={buttonLink}
+            accentColor={accentColor}
+          />
+        )}
+        {moreOptions && (
+          <UpsellsButton
+            buttonText={moreOptions}
+            onClick={() => setIsRenderUpsells((prev) => !prev)}
+            isOpen={isRenderUpsells}
+          />
+        )}
       </div>
       <div className="h-[100px]">
         {isRenderUpsells && (

@@ -28,16 +28,20 @@ export const MobileButtons = ({
         {isUpsells && <Upsells upsells={upsells} brandColor={brandColor} />}
       </div>
 
-      <UpsellsButton
-        buttonText={moreOptions}
-        onClick={() => setIsUpsells((prev) => !prev)}
-        isOpen={isUpsells}
-      />
-      <ActionButton
-        buttonText={buttonText}
-        buttonLink={buttonLink}
-        accentColor={accentColor}
-      />
+      {moreOptions && (
+        <UpsellsButton
+          buttonText={moreOptions}
+          onClick={() => setIsUpsells((prev) => !prev)}
+          isOpen={isUpsells}
+        />
+      )}
+      {buttonText && (
+        <ActionButton
+          buttonText={buttonText}
+          buttonLink={buttonLink}
+          accentColor={accentColor}
+        />
+      )}
     </div>
   );
 };

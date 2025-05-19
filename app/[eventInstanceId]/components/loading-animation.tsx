@@ -7,11 +7,12 @@ import { greetings } from "@/i18n/greeting";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-function getTimeOfDay(): "morning" | "afternoon" | "evening" {
+function getTimeOfDay(): "morning" | "afternoon" | "evening" | "night" {
   const hour = new Date().getHours();
-  if (hour < 12) return "morning";
-  if (hour < 18) return "afternoon";
-  return "evening";
+  if (hour < 12 && hour >= 6) return "morning";
+  if (hour < 17 && hour >= 12) return "afternoon";
+  if (hour < 24 && hour >= 17) return "evening";
+  return "night";
 }
 
 export default function LoadingAnimation({
