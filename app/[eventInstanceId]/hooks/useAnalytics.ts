@@ -16,9 +16,9 @@ const useAnalytics = () => {
         await fetch(
           `${
             process.env.NEXT_PUBLIC_BASE_URL || ""
-          }/api/event-analytics/${eventInstanceId}`,
+          }/api/event-analytics/initiate/${eventInstanceId}`,
           {
-            method: "POST",
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
             },

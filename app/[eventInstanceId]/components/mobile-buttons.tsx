@@ -23,8 +23,8 @@ export const MobileButtons = ({
   const [isUpsells, setIsUpsells] = useState(false);
 
   return (
-    <div className="flex  flex-col lg:hidden justify-end items-center pt-10 ">
-      <div className="h-[100px] mb-10">
+    <div className="flex flex-col lg:hidden justify-end items-center ">
+      <div className="h-[100px] mb-4">
         {isUpsells && <Upsells upsells={upsells} brandColor={brandColor} />}
       </div>
 

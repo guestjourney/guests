@@ -22,7 +22,7 @@ function Upsell({
 
   return (
     <div
-      className="flex items-center gap-4 p-4 cursor-pointer flex-col justify-center"
+      className="flex items-center gap-2 p-3 cursor-pointer flex-col justify-center"
       onClick={handleClick}
     >
       <Image
@@ -30,7 +30,7 @@ function Upsell({
         alt={text}
         width={24}
         height={24}
-        className="rounded-full bg-black/30 hover:bg-black/50 w-16 h-16 p-4 cursor-pointer hover:scale-110 transition-all duration-300 upsell"
+        className="rounded-full bg-black/30 hover:bg-black/50 lg:w-16 lg:h-16 w-12 h-12 lg:p-4 p-3 cursor-pointer hover:scale-110 transition-all duration-300 upsell"
         style={{ "--brand-color": brandColor } as React.CSSProperties}
       />
       <span className="text-center capitalize">{text}</span>

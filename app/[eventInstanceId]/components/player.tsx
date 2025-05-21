@@ -55,6 +55,7 @@ export function Player({
     script.async = true;
 
     const handlePlayerEvents = (event: string, _id: string, data: any) => {
+      console.log(event);
       switch (event) {
         case "play":
           updateEventAnalytics({ play: true });
@@ -69,6 +70,7 @@ export function Player({
           updateEventAnalytics({ volumeChange: true });
           break;
         case "fullscreen":
+          console.log("fullscreen");
           updateEventAnalytics({ fullScreen: true });
           break;
         case "download":

@@ -6,7 +6,7 @@ export async function PATCH(
 ) {
   try {
     const eventInstanceId = (await params).eventInstanceId;
-    const body = await request.json();
+    const ua = userAgent(request);
 
     const response = await fetch(
       `${process.env.API_URL}/event-analytics/${eventInstanceId}`,
@@ -16,7 +16,13 @@ export async function PATCH(
           "Content-Type": "application/json",
           "x-api-key": process.env.API_KEY || "",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({
+          pageVisits: 1,
+          browser: ua.browser.name,
+          device: `${ua.device.vendor} ${ua.device.model}`,
+          os: ua.os.name,
+          isBot: ua.isBot,
+        }),
       }
     );
 
