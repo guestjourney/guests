@@ -4,9 +4,12 @@ import { Player } from "./player";
 import { Buttons } from "./buttons";
 import LoadingAnimation from "./loading-animation";
 import Image from "next/image";
-import "./styles.css";
 import { MobileButtons } from "./mobile-buttons";
 import { Analytics } from "./analytics";
+import { Outfit } from "next/font/google";
+import "./styles.css";
+
+const outfit = Outfit({ subsets: ["latin"], weight: ["400", "700"] });
 
 type ClientWrapperProps = {
   logo: string;
@@ -48,8 +51,8 @@ export function ClientWrapper({
   generatedSubtitles,
 }: ClientWrapperProps) {
   return (
-    <>
-      <div className="min-h-screen min-w-screen flex flex-col lg:flex-row">
+    <div className={outfit.className} suppressHydrationWarning>
+      <div className="h-dvh w-dvw lg:min-h-screen lg:min-w-screen flex flex-col lg:flex-row">
         <LoadingAnimation language={language} name={name} />
         {/* left */}
         <div
@@ -95,6 +98,6 @@ export function ClientWrapper({
         />
       </div>
       <Analytics />
-    </>
+    </div>
   );
 }

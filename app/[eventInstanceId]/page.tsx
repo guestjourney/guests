@@ -1,7 +1,4 @@
-import { Outfit } from "next/font/google";
 import { ClientWrapper } from "./components/client-wrapper";
-
-const outfit = Outfit({ subsets: ["latin"], weight: ["400", "700"] });
 
 type EventInstancePayloadDto = {
   logo: string;
@@ -80,29 +77,25 @@ export default async function Page({ params }: { params: Params }) {
 
     // Create a client boundary by wrapping the ClientWrapper in a div
     return (
-      <div className={outfit.className}>
-        <div suppressHydrationWarning>
-          <ClientWrapper
-            eventInstanceId={eventInstanceId}
-            logo={logo}
-            brandColor={brandColor}
-            accentColor={accentColor}
-            fontColor={fontColor}
-            title={title || ""}
-            description={description || ""}
-            buttonText={buttonText || ""}
-            buttonLink={buttonLink || ""}
-            moreOptions={moreOptions || ""}
-            upsells={upsells}
-            generatedVideo={generatedVideo}
-            thumbnail={thumbnail}
-            fallbackVideoUrl={fallbackVideoUrl}
-            name={variables.firstName || variables.name || ""}
-            language={language}
-            generatedSubtitles={generatedSubtitles}
-          />
-        </div>
-      </div>
+      <ClientWrapper
+        eventInstanceId={eventInstanceId}
+        logo={logo}
+        brandColor={brandColor}
+        accentColor={accentColor}
+        fontColor={fontColor}
+        title={title || ""}
+        description={description || ""}
+        buttonText={buttonText || ""}
+        buttonLink={buttonLink || ""}
+        moreOptions={moreOptions || ""}
+        upsells={upsells}
+        generatedVideo={generatedVideo}
+        thumbnail={thumbnail}
+        fallbackVideoUrl={fallbackVideoUrl}
+        name={variables.firstName || variables.name || ""}
+        language={language}
+        generatedSubtitles={generatedSubtitles}
+      />
     );
   } catch (error) {
     console.error("Error fetching data:", error);
