@@ -56,7 +56,7 @@ export function ClientWrapper({
         <LoadingAnimation language={language} name={name} />
         {/* left */}
         <div
-          className="w-full lg:w-3/5 flex items-center p-4 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1 lg:flex-row flex-col"
+          className="w-full lg:w-3/5 flex items-center p-10 pt-12 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1 lg:flex-row flex-col"
           style={{ backgroundColor: brandColor }}
         >
           <div
