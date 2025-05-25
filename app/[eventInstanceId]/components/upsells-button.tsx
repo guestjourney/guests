@@ -14,7 +14,7 @@ const UpsellsButton = ({
 }) => {
   return (
     <button
-      className="uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer  lg:rounded-[50px] w-full lg:w-fit lg:border-1 lg:border-white more-button"
+      className="uppercase font-bold lg:py-3 lg:px-6 flex items-center justify-center gap-4 cursor-pointer  lg:rounded-[50px] w-full lg:w-fit lg:border-1 lg:border-white more-button"
       onClick={onClick}
     >
       {buttonText}
