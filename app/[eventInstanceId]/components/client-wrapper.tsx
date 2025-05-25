@@ -52,7 +52,7 @@ export function ClientWrapper({
 }: ClientWrapperProps) {
   return (
     <div className={outfit.className} suppressHydrationWarning>
-      <div className="h-dvh w-dvw lg:min-h-screen lg:min-w-screen flex flex-col lg:flex-row border-2 border-red-500">
+      <div className="h-dvh w-dvw lg:min-h-screen lg:min-w-screen flex flex-col lg:flex-row">
         <LoadingAnimation language={language} name={name} />
         <div
           className="w-full lg:w-3/5 flex items-center p-5 pt-6 pb-10 lg:pt-12 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1 lg:flex-row flex-col"
