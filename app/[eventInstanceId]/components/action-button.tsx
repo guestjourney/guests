@@ -17,10 +17,9 @@ const ActionButton = ({
   return (
     <button
       onClick={() => window.open(buttonLink, "_blank")}
-      className="animate-glue uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer lg:rounded-[50px] text-white w-full lg:w-fit"
+      className="uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer lg:rounded-[50px] text-white w-full lg:w-fit"
       style={
         {
-          "--animate-glue-color": accentColor,
           backgroundColor: accentColor,
         } as React.CSSProperties
       }
