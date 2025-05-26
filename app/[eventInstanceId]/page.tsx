@@ -5,6 +5,7 @@ type EventInstancePayloadDto = {
   brandColor: string;
   accentColor: string;
   fontColor: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fields: Record<string, any>;
   thumbnail: string;
   generatedVideo: string;
