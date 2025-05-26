@@ -70,7 +70,7 @@ export function ClientWrapper({
               className="mb-4 lg:mb-16"
             />
             <h1 className="text-[26px] lg:text-[45px] font-bold">{title}</h1>
-            <p className="text-2xl description mb-4 lg:mb-0">{description}</p>
+            <p className="text-2xl description mb-4 lg:mb-8">{description}</p>
             <Buttons
               buttonText={buttonText}
               buttonLink={buttonLink}
