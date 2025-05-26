@@ -5,10 +5,7 @@ type EventInstancePayloadDto = {
   brandColor: string;
   accentColor: string;
   fontColor: string;
-  fields: Array<{
-    key: string;
-    value: string;
-  }>;
+  fields: Record<string, any>;
   thumbnail: string;
   generatedVideo: string;
   variables: Record<string, string>;
@@ -45,12 +42,13 @@ export default async function Page({ params }: { params: Params }) {
     }
 
     const data = (await response.json()) as EventInstancePayloadDto;
+
     const {
       logo = "",
       brandColor,
       accentColor,
       fontColor = "#ffffff",
-      fields = [],
+      fields = {},
       thumbnail = "",
       generatedVideo = "",
       upsells = [],
@@ -60,20 +58,12 @@ export default async function Page({ params }: { params: Params }) {
       generatedSubtitles = "",
     } = data;
 
-    const description = fields.find(
-      (field) => field.key === "description"
-    )?.value;
+    const description = fields.description;
 
-    const title = fields.find((field) => field.key === "title")?.value;
-    const buttonText = fields.find(
-      (field) => field.key === "buttonText"
-    )?.value;
-    const buttonLink = fields.find(
-      (field) => field.key === "buttonLink"
-    )?.value;
-    const moreOptions = fields.find(
-      (field) => field.key === "moreOptions"
-    )?.value;
+    const title = fields.title;
+    const buttonText = fields.buttonText;
+    const buttonLink = fields.buttonLink;
+    const moreOptions = fields.moreOptions;
 
     // Create a client boundary by wrapping the ClientWrapper in a div
     return (
