@@ -29,7 +29,7 @@ const Buttons = ({
             accentColor={accentColor}
           />
         )}
-        {moreOptions && (
+        {moreOptions && upsells.length > 0 && (
           <UpsellsButton
             buttonText={moreOptions}
             onClick={() => setIsRenderUpsells((prev) => !prev)}

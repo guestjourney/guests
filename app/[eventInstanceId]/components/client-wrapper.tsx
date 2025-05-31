@@ -86,7 +86,7 @@ export function ClientWrapper({
               videoUrl={generatedVideo || fallbackVideoUrl}
               eventInstanceId={eventInstanceId}
               thumbnailUrl={thumbnail}
-              subtitles={generatedSubtitles}
+              subtitles={generatedVideo ? generatedSubtitles : ""}
             />
           </div>
         </div>
