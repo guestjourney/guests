@@ -1,4 +1,5 @@
 import { ClientWrapper } from "./components/client-wrapper";
+import Script from "next/script";
 
 type EventInstancePayloadDto = {
   logo: string;
@@ -76,7 +77,7 @@ export default async function Page({ params }: { params: Params }) {
     return (
       <>
         {htmlScripts.map((script: string) => (
-          <script key={script} src={script}></script>
+          <Script key={script} src={script}></Script>
         ))}
         <ClientWrapper
           eventInstanceId={eventInstanceId}
