@@ -12,6 +12,7 @@ export const MobileButtons = ({
   buttonText,
   buttonLink,
   moreOptions,
+  dir,
 }: {
   upsells: any;
   brandColor: string;
@@ -19,6 +20,7 @@ export const MobileButtons = ({
   buttonText: string;
   buttonLink: string;
   moreOptions: string;
+  dir: "ltr" | "rtl";
 }) => {
   const [isUpsells, setIsUpsells] = useState(false);
 
@@ -40,6 +42,7 @@ export const MobileButtons = ({
           buttonText={buttonText}
           buttonLink={buttonLink}
           accentColor={accentColor}
+          dir={dir}
         />
       )}
     </div>

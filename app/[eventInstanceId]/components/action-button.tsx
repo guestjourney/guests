@@ -9,15 +9,17 @@ const ActionButton = ({
   buttonText,
   buttonLink,
   accentColor,
+  dir,
 }: {
   buttonText: string;
   buttonLink: string;
   accentColor: string;
+  dir?: "rtl" | "ltr";
 }) => {
   return (
     <button
       onClick={() => window.open(buttonLink, "_blank")}
-      className="uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer lg:rounded-[50px] text-white w-full lg:w-fit"
+      className={`lg:flex-row uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer lg:rounded-[50px] text-white w-full lg:w-fit`}
       style={
         {
           backgroundColor: accentColor,
@@ -28,7 +30,7 @@ const ActionButton = ({
       <Lottie
         animationData={arrow}
         loop={true}
-        className="w-8 h-8 rotate-270"
+        className={`w-8 h-8  ${dir === "ltr" ? "rotate-270" : "rotate-90"}`}
       />
     </button>
   );

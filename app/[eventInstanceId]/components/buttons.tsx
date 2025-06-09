@@ -10,6 +10,7 @@ type ButtonsProps = {
   moreOptions: string;
   upsells: { text: string; icon: string; link: string }[];
   accentColor: string;
+  dir?: "rtl" | "ltr";
 };
 const Buttons = ({
   buttonText,
@@ -17,6 +18,7 @@ const Buttons = ({
   moreOptions,
   upsells,
   accentColor,
+  dir,
 }: ButtonsProps) => {
   const [isRenderUpsells, setIsRenderUpsells] = useState(false);
   return (
@@ -27,6 +29,7 @@ const Buttons = ({
             buttonText={buttonText}
             buttonLink={buttonLink}
             accentColor={accentColor}
+            dir={dir}
           />
         )}
         {moreOptions && upsells.length > 0 && (

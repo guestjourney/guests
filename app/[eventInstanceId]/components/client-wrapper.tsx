@@ -29,6 +29,7 @@ type ClientWrapperProps = {
   language: string;
   eventInstanceId: string;
   generatedSubtitles: string;
+  dir?: "rtl" | "ltr";
 };
 
 export function ClientWrapper({
@@ -49,13 +50,16 @@ export function ClientWrapper({
   language,
   eventInstanceId,
   generatedSubtitles,
+  dir = "ltr",
 }: ClientWrapperProps) {
   return (
-    <div className={outfit.className} suppressHydrationWarning>
+    <div dir={dir} className={outfit.className} suppressHydrationWarning>
       <div className="h-dvh w-dvw lg:min-h-screen lg:min-w-screen flex flex-col lg:flex-row">
         <LoadingAnimation language={language} name={name} />
         <div
-          className="w-full lg:w-3/5 flex items-center p-5 pt-6 pb-10 lg:pt-12 lg:p-20 lg:pr-[20%] lg:pb-10 flex-1 lg:flex-row flex-col"
+          className={`w-full lg:w-3/5 flex items-center p-5 pt-6 pb-10 lg:pt-12 lg:p-20  lg:pb-10 flex-1 lg:flex-row flex-col ${
+            dir === "ltr" ? "lg:pr-[20%]" : "lg:pl-[20%]"
+          }`}
           style={{ backgroundColor: brandColor }}
         >
           <div
@@ -77,11 +81,16 @@ export function ClientWrapper({
               moreOptions={moreOptions}
               upsells={upsells}
               accentColor={accentColor}
+              dir={dir}
             />
           </div>
         </div>
         <div className="w-full lg:w-2/5 relative flex justify-center">
-          <div className="relative lg:absolute lg:top-1/2 -top-[24px] lg:-left-1/3 lg:-translate-y-1/2 rounded-3xl overflow-hidden w-[90%] lg:w-full">
+          <div
+            className={`relative lg:absolute lg:top-1/2 -top-[24px] lg:-translate-y-1/2 rounded-3xl overflow-hidden w-[90%] lg:w-full ${
+              dir === "ltr" ? "lg:-left-1/3" : "lg:-right-1/3"
+            }`}
+          >
             <Player
               videoUrl={generatedVideo || fallbackVideoUrl}
               eventInstanceId={eventInstanceId}
@@ -97,6 +106,7 @@ export function ClientWrapper({
           buttonText={buttonText}
           buttonLink={buttonLink}
           moreOptions={moreOptions}
+          dir={dir}
         />
       </div>
       <Analytics />
