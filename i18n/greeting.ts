@@ -29,4 +29,34 @@ export const greetings: Record<string, Record<string, string>> = {
     evening: "Guten Abend",
     night: "Guten Abend",
   },
+  it: {
+    morning: "Buongiorno",
+    afternoon: "Buon pomeriggio",
+    evening: "Buonasera",
+    night: "Buonanotte",
+  },
+  ar: {
+    morning: "صباح الخير",
+    afternoon: "أي بعد الظهر",
+    evening: "مساء الخير",
+    night: "לילה טוב",
+  },
+  he: {
+    morning: "בוקר טוב",
+    afternoon: "צהריים טובים",
+    evening: "ערב טוב",
+    night: "לילה טוב",
+  },
+  ja: {
+    morning: "おはようございます",
+    afternoon: "こんにちは",
+    evening: "こんばんは",
+    night: "こんばんは",
+  },
+  ko: {
+    morning: "좋은 아침",
+    afternoon: "좋은 오후",
+    evening: "좋은 저녁",
+    night: "좋은 밤",
+  },
 };
