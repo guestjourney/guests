@@ -20,6 +20,7 @@ type EventInstancePayloadDto = {
   language: string;
   generatedSubtitles: string;
   direction: "ltr" | "rtl";
+  htmlScripts: string[];
 };
 
 type Params = Promise<{ eventInstanceId: string }>;
@@ -45,6 +46,8 @@ export default async function Page({ params }: { params: Params }) {
 
     const data = (await response.json()) as EventInstancePayloadDto;
 
+    console.log(data);
+
     const {
       logo = "",
       brandColor,
@@ -59,6 +62,7 @@ export default async function Page({ params }: { params: Params }) {
       variables = {},
       generatedSubtitles = "",
       direction = "ltr",
+      htmlScripts = [],
     } = data;
 
     const description = fields.description;
@@ -70,26 +74,31 @@ export default async function Page({ params }: { params: Params }) {
 
     // Create a client boundary by wrapping the ClientWrapper in a div
     return (
-      <ClientWrapper
-        eventInstanceId={eventInstanceId}
-        logo={logo}
-        brandColor={brandColor}
-        accentColor={accentColor}
-        fontColor={fontColor}
-        title={title || ""}
-        description={description || ""}
-        buttonText={buttonText || ""}
-        buttonLink={buttonLink || ""}
-        moreOptions={moreOptions || ""}
-        upsells={upsells}
-        generatedVideo={generatedVideo}
-        thumbnail={thumbnail}
-        fallbackVideoUrl={fallbackVideoUrl}
-        name={variables.firstName || variables.name || ""}
-        language={language}
-        generatedSubtitles={generatedSubtitles}
-        dir={direction}
-      />
+      <>
+        {htmlScripts.map((script: string) => (
+          <script key={script} src={script}></script>
+        ))}
+        <ClientWrapper
+          eventInstanceId={eventInstanceId}
+          logo={logo}
+          brandColor={brandColor}
+          accentColor={accentColor}
+          fontColor={fontColor}
+          title={title || ""}
+          description={description || ""}
+          buttonText={buttonText || ""}
+          buttonLink={buttonLink || ""}
+          moreOptions={moreOptions || ""}
+          upsells={upsells}
+          generatedVideo={generatedVideo}
+          thumbnail={thumbnail}
+          fallbackVideoUrl={fallbackVideoUrl}
+          name={variables.firstName || variables.name || ""}
+          language={language}
+          generatedSubtitles={generatedSubtitles}
+          dir={direction}
+        />
+      </>
     );
   } catch (error) {
     console.error("Error fetching data:", error);
