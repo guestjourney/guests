@@ -13,10 +13,10 @@ const useAnalytics = () => {
 
     const sendAnalytics = async () => {
       try {
+        const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
         await fetch(
-          `${
-            process.env.NEXT_PUBLIC_BASE_URL || ""
-          }/api/event-analytics/initiate/${eventInstanceId}`,
+          `${baseUrl}/api/event-analytics/initiate/${eventInstanceId}`,
           {
             method: "PATCH",
             headers: {
