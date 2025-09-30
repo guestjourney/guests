@@ -34,10 +34,10 @@ export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
   try {
+    const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
     const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BASE_URL || ""
-      }/api/event-instance/${eventInstanceId}`,
+      `${baseUrl}/api/event-instance/${eventInstanceId}`,
       { cache: "no-store" }
     );
 

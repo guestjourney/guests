@@ -27,10 +27,10 @@ export function Player({
 }) {
   const updateEventAnalytics = async (body: Record<string, any>) => {
     try {
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
       const response = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_BASE_URL || ""
-        }/api/event-analytics/${eventInstanceId}`,
+        `${baseUrl}/api/event-analytics/${eventInstanceId}`,
         {
           headers: {
             "Content-Type": "application/json",
