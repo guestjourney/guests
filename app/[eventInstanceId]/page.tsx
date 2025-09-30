@@ -1,5 +1,6 @@
 import { ClientWrapper } from "./components/client-wrapper";
 import Script from "next/script";
+import { headers } from "next/headers";
 
 type EventInstancePayloadDto = {
   logo: string;
@@ -34,7 +35,10 @@ export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
   try {
-    const baseUrl = `${window.location.protocol}//${window.location.host}`;
+    const headersList = await headers();
+    const host = headersList.get("host"); // e.g. "hsmai.myguest.video"
+    const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+    const baseUrl = `${protocol}://${host}`;
 
     const response = await fetch(
       `${baseUrl}/api/event-instance/${eventInstanceId}`,
