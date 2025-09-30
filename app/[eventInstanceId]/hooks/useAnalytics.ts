@@ -13,13 +13,18 @@ const useAnalytics = () => {
 
     const sendAnalytics = async () => {
       try {
-        await fetch(`/api/event-analytics/initiate/${eventInstanceId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          signal,
-        });
+        await fetch(
+          `${
+            process.env.NEXT_PUBLIC_BASE_URL || ""
+          }/api/event-analytics/initiate/${eventInstanceId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            signal,
+          }
+        );
       } catch (error: any) {
         // Ignore abort errors
         if (error.name === "AbortError") {

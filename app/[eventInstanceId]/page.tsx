@@ -34,9 +34,12 @@ export default async function Page({ params }: { params: Params }) {
   const { eventInstanceId } = await params;
 
   try {
-    const response = await fetch(`/api/event-instance/${eventInstanceId}`, {
-      cache: "no-store",
-    });
+    const response = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_BASE_URL || ""
+      }/api/event-instance/${eventInstanceId}`,
+      { cache: "no-store" }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data: ${response.statusText}`);

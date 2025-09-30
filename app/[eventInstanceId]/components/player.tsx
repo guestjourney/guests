@@ -27,13 +27,18 @@ export function Player({
 }) {
   const updateEventAnalytics = async (body: Record<string, any>) => {
     try {
-      const response = await fetch(`/api/event-analytics/${eventInstanceId}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "PATCH",
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BASE_URL || ""
+        }/api/event-analytics/${eventInstanceId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "PATCH",
+          body: JSON.stringify(body),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to update analytics");
       }
