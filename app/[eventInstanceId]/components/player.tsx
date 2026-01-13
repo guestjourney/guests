@@ -1,17 +1,17 @@
-"use client";
+'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react'
 
 declare global {
   interface Window {
-    Playerjs: any;
-    PlayerjsEvents: (event: string, id: string, data: any) => void;
+    Playerjs: any
+    PlayerjsEvents: (event: string, id: string, data: any) => void
   }
 }
 
 function percentStringToNumber(percent: string): number {
-  return parseFloat(percent.replace("%", ""));
+  return parseFloat(percent.replace('%', ''))
 }
 
 export function Player({
@@ -20,103 +20,100 @@ export function Player({
   thumbnailUrl,
   subtitles,
 }: {
-  videoUrl: string;
-  eventInstanceId: string;
-  thumbnailUrl: string;
-  subtitles: string;
+  videoUrl: string
+  eventInstanceId: string
+  thumbnailUrl: string
+  subtitles: string
 }) {
   const updateEventAnalytics = async (body: Record<string, any>) => {
     try {
-      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      const baseUrl = `${window.location.protocol}//${window.location.host}`
 
       const response = await fetch(
         `${baseUrl}/api/event-analytics/${eventInstanceId}`,
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-          method: "PATCH",
+          method: 'PATCH',
           body: JSON.stringify(body),
         }
-      );
+      )
       if (!response.ok) {
-        throw new Error("Failed to update analytics");
+        throw new Error('Failed to update analytics')
       }
     } catch (error) {
-      console.error("Error updating analytics:", error);
+      console.error('Error updating analytics:', error)
     }
-  };
+  }
 
   useEffect(() => {
-    if (!videoUrl) return;
+    if (!videoUrl) return
 
-    const script = document.createElement("script");
-    script.src = "/js/playerjs.js";
-    script.async = true;
+    const script = document.createElement('script')
+    script.src = '/js/playerjs.js'
+    script.async = true
 
     const handlePlayerEvents = (event: string, _id: string, data: any) => {
-      console.log(event);
       switch (event) {
-        case "play":
-          updateEventAnalytics({ play: true });
-          break;
-        case "userpause":
-          updateEventAnalytics({ pause: true });
-          break;
-        case "quartile":
-          updateEventAnalytics({ progress: percentStringToNumber(data) });
-          break;
-        case "volume":
-          updateEventAnalytics({ volumeChange: true });
-          break;
-        case "fullscreen":
-          console.log("fullscreen");
-          updateEventAnalytics({ fullScreen: true });
-          break;
-        case "download":
-          updateEventAnalytics({ download: true });
-          break;
-        case "geo":
-          console.log(data);
-          break;
+        case 'play':
+          updateEventAnalytics({ play: true })
+          break
+        case 'userpause':
+          updateEventAnalytics({ pause: true })
+          break
+        case 'quartile':
+          updateEventAnalytics({ progress: percentStringToNumber(data) })
+          break
+        case 'volume':
+          updateEventAnalytics({ volumeChange: true })
+          break
+        case 'fullscreen':
+          updateEventAnalytics({ fullScreen: true })
+          break
+        case 'download':
+          updateEventAnalytics({ download: true })
+          break
+        case 'geo':
+          break
       }
-    };
+    }
 
     script.onload = () => {
       if (window.Playerjs) {
         new window.Playerjs({
-          id: "player",
+          id: 'player',
           file: videoUrl,
           poster: thumbnailUrl,
           subtitle: subtitles,
-          default_subtitle: "Default",
+          default_subtitle: 'Default',
           controls: true,
           fullscreen: true,
           mobileAutoFullscreen: false,
           playsinline: true,
           pip: false,
           settings: {
-            background_color: "#000000",
-            subtitle_background_color: "#000000",
+            background_color: '#000000',
+            subtitle_background_color: '#000000',
             subtitle_opacity: 0.7,
-            subtitle_text_color: "#FFFFFF",
-            subtitle_text_size: "125%",
+            subtitle_text_color: '#FFFFFF',
+            subtitle_text_size: '125%',
             subtitle_bottom_margin: 10,
           },
-        });
+        })
 
-        window.PlayerjsEvents = handlePlayerEvents;
+        window.PlayerjsEvents = handlePlayerEvents
       }
-    };
+    }
 
-    document.body.appendChild(script);
+    document.body.appendChild(script)
 
     return () => {
       if (script.parentNode) {
-        document.body.removeChild(script);
+        document.body.removeChild(script)
       }
-    };
-  }, [videoUrl, eventInstanceId, thumbnailUrl, subtitles]);
+    }
+  }, [videoUrl, eventInstanceId, thumbnailUrl, subtitles])
 
-  return <div id="player" className="player"></div>;
+  return <div id='player' className='player'></div>
 }

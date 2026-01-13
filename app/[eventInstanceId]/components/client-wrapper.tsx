@@ -82,6 +82,7 @@ export function ClientWrapper({
               upsells={upsells}
               accentColor={accentColor}
               dir={dir}
+              eventInstanceId={eventInstanceId}
             />
           </div>
         </div>
@@ -107,6 +108,7 @@ export function ClientWrapper({
           buttonLink={buttonLink}
           moreOptions={moreOptions}
           dir={dir}
+          eventInstanceId={eventInstanceId}
         />
       </div>
       <Analytics />

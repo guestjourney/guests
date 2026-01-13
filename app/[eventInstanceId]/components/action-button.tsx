@@ -10,15 +10,20 @@ const ActionButton = ({
   buttonLink,
   accentColor,
   dir,
+  onAnalyticsClick,
 }: {
   buttonText: string;
   buttonLink: string;
   accentColor: string;
   dir?: "rtl" | "ltr";
+  onAnalyticsClick?: () => void;
 }) => {
   return (
     <button
-      onClick={() => window.open(buttonLink, "_blank")}
+      onClick={() => {
+        onAnalyticsClick?.();
+        window.open(buttonLink, "_blank");
+      }}
       className={`lg:flex-row uppercase font-bold py-3 px-6 flex items-center justify-center gap-4 cursor-pointer lg:rounded-[50px] text-white w-full lg:w-fit`}
       style={
         {

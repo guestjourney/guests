@@ -13,6 +13,7 @@ export const MobileButtons = ({
   buttonLink,
   moreOptions,
   dir,
+  eventInstanceId,
 }: {
   upsells: any;
   brandColor: string;
@@ -21,8 +22,22 @@ export const MobileButtons = ({
   buttonLink: string;
   moreOptions: string;
   dir: "ltr" | "rtl";
+  eventInstanceId: string;
 }) => {
   const [isUpsells, setIsUpsells] = useState(false);
+
+  const updateEventAnalytics = async () => {
+    try {
+      const baseUrl = `${window.location.protocol}//${window.location.host}`;
+      await fetch(`${baseUrl}/api/event-analytics/${eventInstanceId}`, {
+        headers: { "Content-Type": "application/json" },
+        method: "PATCH",
+        body: JSON.stringify({ primaryButtonClick: true }),
+      });
+    } catch (error) {
+      console.error("Error updating analytics:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col  gap-2 lg:hidden flex-1 justify-end items-center ">
@@ -43,6 +58,7 @@ export const MobileButtons = ({
           buttonLink={buttonLink}
           accentColor={accentColor}
           dir={dir}
+          onAnalyticsClick={updateEventAnalytics}
         />
       )}
     </div>
