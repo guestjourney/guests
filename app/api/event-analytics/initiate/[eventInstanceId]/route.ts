@@ -19,7 +19,12 @@ export async function PATCH(
         body: JSON.stringify({
           pageVisits: 1,
           browser: ua.browser.name,
-          device: `${ua.device.vendor} ${ua.device.model}`,
+          device:
+            ua.device.vendor && ua.device.model
+              ? `${ua.device.vendor} ${ua.device.model}`
+              : ua.device.type
+                ? ua.os.name || ua.device.type
+                : "Desktop",
           os: ua.os.name,
           isBot: ua.isBot,
         }),
