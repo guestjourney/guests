@@ -5,11 +5,7 @@ import { Button } from '@/components/ui/button'
 import dynamic from 'next/dynamic'
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
-export default function Error({
-  error,
-}: {
-  error: Error & { digest?: string }
-}) {
+export default function Error() {
   return (
     <div className='h-screen w-screen flex flex-col items-center justify-center p-4'>
       <Lottie
