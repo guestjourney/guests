@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
 import errorAnimation from '@/lotties/error.json'
 import { Button } from '@/components/ui/button'
 import dynamic from 'next/dynamic'
